@@ -1,0 +1,968 @@
+/*
+ *  CSS and images by lobsters_upon_you (unless otherwise noted)
+ *
+ *  If you have any questions about the css, or notice any visual problems, please PM lobsters
+ *
+ *  Obvious design inspiration taken from /r/apple, /r/realmadrid, and pretty much anything /u/rolmos touches
+ *
+ *  Thanks to /u/raerth for providing the linkflair css:
+ *
+ *   http://www.reddit.com/r/raerth/comments/ls8k4/tutorial_code_get_link_flair_in_your_subreddit/
+ *
+ *  Contents
+ *      Global styles
+ *      Header
+ *      Sidebar
+ *          Sticky
+ *
+ *      Flair
+ *      Content
+ *          Linklist (front page/top/controversial/saved)
+ *          Comments
+ *          Search page
+ *      Footer
+ *      Spam
+ *      /u/raerth's linklist styling
+ *
+ * Selectors are roughly organized by the order of how the elements appear in the page.
+ */
+
+/* global stuff*/
+html { position: relative }
+
+body { font-family: verdana, arial, sans-serif }
+
+a { color: #e9363a }
+
+.arrow {
+    background: url(%%arrows%%) no-repeat transparent !important;
+    margin: 2px auto;
+    height: 15px;
+    width: 16px }
+
+    .arrow.down { background-position: 0 0 !important }
+
+    .arrow.downmod { background-position: -16px 0 !important }
+
+    .arrow.up { background-position: -32px 0 !important }
+
+    .arrow.upmod { background-position: -48px 0 !important }
+
+blockquote { border-color: #e9363a }
+
+.drop-choices {
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    z-index: 1000 }
+
+    .drop-choices a.choice { background: #efefef }
+
+        .drop-choices a.choice:hover { background: #fff }
+
+.error { color: #e9363a }
+
+h1 { font-size: 20px }
+
+h2 { color: #e9363a }
+
+.menuarea, .panestack-title { border-bottom: none }
+
+.pretty-button {
+    border: 0;
+    border-radius: 5px; }
+
+a.pretty-button.positive, a.pretty-button.negative {
+    background: #2c2a2a;
+    color: #e9363a; }
+
+a.pretty-button.positive:hover, a.pretty-button.negative:hover {
+    background: #e9363a;
+    color: #2c2a2a }
+
+a.pretty-button.positive.pressed, a.pretty-button.negative.pressed {
+    background: #e9363a;
+    color: #2c2a2a; }
+
+.red { color: #e9363a }
+
+hr {
+    background-color: #dfdfdf;
+    border: 0;
+    height: 1px;
+    margin: 15px !important }
+
+table a {
+    color: #2c2a2a;
+    text-decoration: underline }
+
+    table a:hover { text-decoration: none }
+
+th {
+    background: #e9363a;
+    border: solid #cb181c;
+    border-width: 1px 1px 0;
+    color: #fff;
+    text-align: center;
+    text-shadow: 1px 1px 0 #2c2a2a }
+
+td { border: 0 !important }
+
+tr:nth-of-type(even) {
+    background: #efefef; /* zebra stipes */
+    border: 0 }
+
+tr:nth-of-type(odd) {
+    background: #fff; /* zebra stipes */
+    border: 0 }
+
+tr:hover { background: #f5a1a3 }
+
+/*------------------------- header elements -------------------------*/
+#header {
+    background: url(%%tempbg%%) repeat-x #222;
+    border: none;
+    font-size: 13px;
+    height: 165px }
+
+.sr-bar a, #srDropdownContainer a { color: #fff }
+
+#srLeftContainer, #RESShortcutsViewport, #RESShortcutsEditContainer, #sr-header-area {
+    background: #222 !important;
+    border: none }
+
+#srLeftContainer a, #RESShortcutsViewport a, #RESShortcutsEditContainer a { color: #fff }
+
+#RESShortcutsRight, #RESShortcutsLeft, #RESShortcutsAdd, #RESShortcutsTrash {
+    background: #222 !important;
+    color: #e9363a !important }
+
+.pagename a {
+    background: url(%%electroniclogolarge%%) no-repeat;
+    display: block;
+    height: 69px;
+    position: absolute;
+    top: 56px;
+    left: 70px;
+    width: 372px }
+
+#header span.redditname a { font-size: 0em }
+
+#header-img-a {
+    background: url(%%sublogosprite%%) no-repeat;
+    background-position: 0 0;
+    height: 78px;
+    position: absolute;
+    left: 8px;
+    top: 35px;
+    width: 68px;
+    z-index: 100 }
+
+    #header-img-a:hover {
+        background-position: 0 -78px;
+        top: 37px }
+
+        #header-img-a:hover img { opacity: 0 }
+
+#header-bottom-left {
+    font-size: 13px;
+    height: 55px }
+
+    #header-bottom-left ul.tabmenu {
+        left: 82px;
+        position: absolute;
+        top: 126px }
+
+#header-bottom-left ul.tabmenu li a {
+            background: #2c2a2a;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px 2px #2C2A2A;
+            color: #e9363a;
+            display: inline-block;
+            font-size: 12px;
+            padding: 5px 6px;
+            height: 15px !important;
+            text-transform: uppercase }
+
+        #header-bottom-left ul.tabmenu li.selected a, #header-bottom-left ul.tabmenu li a:hover {
+            background: #e9363a;
+            color: #2c2a2a; }
+
+#header-bottom-right {
+    background: #222;
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    bottom: auto;
+    font-size: 10px;
+    top: 18px !important }
+
+    #header-bottom-right a { color: #e9363a }
+
+#userbarToggle {
+    background: #2c2a2a !important; /*RES*/
+    border: none !important;
+    color: #222 !important }
+
+.res-navTop #userbarToggle.userbarShow {
+    height: 28px;
+    color: #e9363a }
+
+#sr-header-area {
+    font-family: verdana, arial, sans-serif;
+    font-size: 9px !important }
+
+.redditname {
+    color: #FFFFFF;
+    float: left;
+    margin: 76px 0 0 425px;
+    text-shadow: 0 0 .25em #2c2a2a, 0 0 .25em #2c2a2a }
+
+/*------------------------- sidebar -------------------------*/
+
+.side {
+    color: #222;
+    margin: 46px 5px 0 5px }
+
+    /* rules banner */
+.side blockquote {
+        background: #2c2a2a;
+        border: 0;
+        border-radius: 5px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        color: #fff;
+        padding: 0 0 5px 0;
+        margin: 5px 0 }
+
+        .side blockquote h1 {
+            color: #2c2a2a;
+            background: #e9363a;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            padding: 5px;
+            text-align: center;
+            text-transform: uppercase }
+
+        .side blockquote ul { padding: 5px }
+
+/* Sticky */
+/*#siteTable {  padding-top: 35px } /*disable when there's no sticky*/
+.side a[title="sticky"] {
+    background: #2C2A2A;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0px #2C2A2A;
+    color: #e9363a;
+    display: inline-block;
+    font-size: 12px;
+    position: absolute;
+    left: 86px;
+    top: 175px;
+    z-index: 200;
+    padding-right: 5px }
+
+.submit-page .side a[title="sticky"] { left: 280px }
+
+.search-page .side a[title="sticky"] { left: 420px; top: 192px }
+
+.top-page .side a[title="sticky"] { top: 203px }
+
+.wiki-page .side a[title="sticky"] { display: none; }
+
+.side a[title="sticky"]:hover { background: #e9363a; color: #2C2A2A }
+
+.side a[title="sticky"]:before {
+    background: #E9363A;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 0px;
+    color: #fff;
+    content: \"attn: ";
+    display: inline-block;
+    font-weight: bold;
+    height: 15px;
+    padding: 5px;
+    margin-left: -1px;
+    margin-right: 5px;
+    text-align: center }
+
+.side a[title="sticky"]:hover:before { background: #2c2a2a; color: #fff }
+
+.side > div { clear: left; }
+
+.comments-page .side:before { background-position: 0% 100%; }
+
+.side a[href="/r/electronicmusic/submit/"] {
+        background: url(%%submitsprite%%) no-repeat #2c2a2a;
+        background-position: 0 0;
+        border-radius: 5px;
+        color: #e9363a;
+        display: block;
+        font-size: 20px;
+        height: 29px;
+        padding: 4px 6px;
+        position: absolute;
+        right: 77px;
+        text-align: center;
+        text-transform: uppercase;
+        top: 174px;
+        width: 142px }
+
+    .side a[href="/r/electronicmusic/submit/"]:hover {
+        background-color: #e9363a;
+        background-position: 0 -29px }
+
+.fancy-toggle-button .active { border: none }
+
+.fancy-toggle-button .remove {
+    background: #e9363a;
+    color: #2c2a2a }
+
+.fancy-toggle-button .add {
+    background: #2c2a2a;
+    color: #e9363a }
+
+    .fancy-toggle-button .add:hover {
+        background-color: #e9363a;
+        color: #2c2a2a }
+
+.fancy-toggle-button .banned {
+    background-color: #efefef;
+    color: #2c2a2a; }
+
+.RESshortcutside {
+    background: #2c2a2a !important;
+    color: #e9363a !important;
+    border: none !important }
+
+    .RESshortcutside.remove {
+        background-color: #e9363a !important;
+        color: #2c2a2a !important }
+
+    .RESshortcutside:hover {
+        background-color: #e9363a !important;
+        color: #2c2a2a !important }
+
+.RESDashboardToggle {
+    background: #2c2a2a !important;
+    border: none !important;
+    color: #e9363a !important }
+
+    .RESDashboardToggle.remove {
+        background-color: #e9363a !important;
+        color: #2c2a2a !important }
+
+    .RESDashboardToggle:hover {
+        background-color: #e9363a !important;
+        color: #2c2a2a !important }
+
+form#login_login-main {
+    background: #2C2A2A;
+    border: none;
+    border-radius: 5px;
+    color: #fff }
+
+    form#login_login-main a.recover-password { color: #e9363a }
+
+.side .titlebox .redditname { display: none }
+
+.side h1 { font-size: 20px }
+
+.side table {
+    border: none;
+    width: 95% }
+
+.side blockquote:last-child {
+    background: transparent;
+    padding: 0;
+    margin: 0 }
+
+    /* buttons */
+.side blockquote:last-child a {
+        background: url(%%buttonspritesgenre%%) no-repeat;
+        display: inline-block;
+        margin: 10px;
+        height: 50px;
+        width: 50px }
+
+    .side blockquote:last-child a[href="http://www.reddit.com/r/electronicmusic/wiki/subreddits"] {
+        background-position: 0 0;
+        margin-left: 50px }
+
+    .side blockquote:last-child a[href="http://www.reddit.com/r/electronicmusic/wiki/subreddits"]:hover { background-position: 0 -50px }
+
+    .side blockquote:last-child a[href="https://kiwiirc.com/client/irc.emp.cx/#electronic"] { background-position: -50px 0 }
+
+    .side blockquote:last-child a[href="https://kiwiirc.com/client/irc.emp.cx/#electronic"]:hover { background-position: -50px -50px }
+
+    .side blockquote:last-child a[href="http://redditplayer.phoenixforgotten.com/?r=electronicmusic"] { background-position: -100px 0 }
+
+    .side blockquote:last-child a[href="http://redditplayer.phoenixforgotten.com/?r=electronicmusic"]:hover { background-position: -100px -50px }
+
+    .side blockquote:last-child a[href="http://www.reddit.com/r/electronicmusicmodlog"] {
+        background-position: -150px 0;
+        margin-left: 50px }
+
+    .side blockquote:last-child a[href="http://www.reddit.com/r/electronicmusicmodlog"]:hover { background-position: -150px -50px }
+
+    .side blockquote:last-child a[href="http://www.reddit.com/r/electronicmusic/wiki/index"] { background-position: -200px 0 }
+
+    .side blockquote:last-child a[href="http://www.reddit.com/r/electronicmusic/wiki/index"]:hover { background-position: -200px -50px }
+
+    .side blockquote:last-child a[title="Genre Mondays"] { background-position: -250px 0 }
+
+        .side blockquote:last-child a[title="Genre Mondays"]:hover { background-position: -250px -50px }
+
+.sidebox { display: none }
+
+.sidecontentbox .content { border-radius: 5px }
+
+/*------------------------- Flair -------------------------*/
+
+.titlebox .tagline:after {
+    content: " Click 'edit' to set your music flair.";
+    color: #e9363a; }
+
+.flair {
+    background: url(%%flair%%) no-repeat transparent;
+    border: none;
+    color: #222;
+    display: inline-block;
+    height: 16px;
+    padding: 0;
+    position: relative;
+    width: 16px;
+    text-indent: -9999px }
+
+.flair-8tracks      { background-position: 0 0 }
+.flair-bandcamp     { background-position: 0 -16px }
+.flair-grooveshark  { background-position: 0 -32px }
+.flair-lastfm       { background-position: 0 -48px }
+.flair-pandora      { background-position: 0 -64px }
+.flair-reverbnation { background-position: 0 -80px }
+.flair-soundcloud   { background-position: 0 -96px }
+.flair-spotify      { background-position: 0 -112px }
+.flair-mixcloud     { background-position: 0 -128px }
+.flair-mixriot      { background-position: 0 -144px }
+.flair-discogs      { background-position: 0 -160px }
+.flair-youtube      { background-position: 0 -176px }
+.flair-difm         { background-position: 0 -192px }
+.flair-turntablefm  { background-position: 0 -208px }
+
+.flair-mod {
+    background-image: none;
+    text-indent: 0;
+    width: auto }
+
+.flair:hover {
+    background-color: #fff;
+    padding: 0 2px 0 18px;
+    text-indent: 0;
+    width: auto }
+
+.flair-mod:hover { padding: 0 }
+
+.flairselector h2 { background: #2c2a2a }
+
+/*linkflair*/
+
+.linkflairlabel {
+    background-color: #e9363a;
+    border: none;
+    border-radius: 5px;
+    color: #2c2a2a;
+    display: inline-block;
+    font-family: verdana, arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px;
+    margin-right: 5px;
+    max-width: none }
+
+    .linkflair-ambient      .linkflairlabel { background-color: #6A4A3C }
+    .linkflair-breakbeat    .linkflairlabel { background-color: #EDC951 }
+    .linkflair-chiptune     .linkflairlabel { background-color: #33BE2C }
+    .linkflair-downtempo    .linkflairlabel { background-color: #00A0B0 }
+    .linkflair-dnb          .linkflairlabel { background-color: #8EA818 }
+    .linkflair-dubstep      .linkflairlabel { background-color: #50434D }
+    .linkflair-electro      .linkflairlabel { background-color: #864194 }
+    .linkflair-electronica  .linkflairlabel { background-color: #352E29 }
+    .linkflair-hardcore     .linkflairlabel { background-color: # }
+    .linkflair-hardstyle    .linkflairlabel { background-color: # }
+    .linkflair-house        .linkflairlabel { background-color: # }
+    .linkflair-industrial   .linkflairlabel { background-color: # }
+    .linkflair-idm          .linkflairlabel { background-color: # }
+    .linkflair-jungle       .linkflairlabel { background-color: # }
+    .linkflair-techno       .linkflairlabel { background-color: # }
+    .linkflair-trance       .linkflairlabel { background-color: # }
+
+/*------------------------- Content -------------------------*/
+
+/*------------------------- linklist -------------------------*/
+
+.listing-page .content, .search-page .content { margin: 0 5px 0 0 }
+
+.content .infobar {
+    background: #2c2a2a;
+    border: 1px solid #222;
+    border-radius: 5px;
+    color: #fff;
+    margin: 5px 305px 5px 10px }
+
+    .content .infobar a { color: #e9363a }
+
+#siteTable {
+    border-right: solid #dfdfdf 1px;
+    margin: 0 305px 0 0; }
+
+.link {
+    margin: 0;
+    border-bottom: 1px solid #dfdfdf }
+
+.even.link { background: #efefef; /*margin-left: -10px;
+    padding: 5px 13px */ }
+
+span.rank { width: 18px !important }
+
+#siteTable a.title {
+    color: #222;
+    font-weight: normal;
+    font-size: 16px }
+
+a.author { color: #222 }
+
+#siteTable a.title:hover { color: #e9363a }
+
+#siteTable a:visited { color: #888 }
+
+.link .usertext .md {
+    background: none;
+    border: none; }
+
+/* RES stuff */
+.link.last-clicked { border: none }
+
+/*.commentarea .RES-keyNav-activeElement .md,*/
+.RES-keyNav-activeElement, #siteTable .RES-keyNav-activeElement, #siteTable .thing .RES-keyNav-activeElement,  .commentarea .RES-keyNav-activeElement.entry .noncollapsed, .keyHighlight, .res .commentarea .RES-keyNav-activeElement, .res .siteTable .RES-keyNav-activeElement .keyHighlight {
+    background-color: transparent !important; /*
+    background: url(%%resnav%%) no-repeat scroll 100% 0% !important;*/
+    border-right: 2px solid #E9363A !important;
+    outline: none !important;
+    padding: 0 !important }
+
+#authorInfoToolTip {
+    background: #fff;
+    border: 1px solid #dfdfdf }
+
+    #authorInfoToolTip h3 {
+        background: #2c2a2a;
+        color: #fff }
+
+#authorInfoToolTipClose:hover {
+    background: #f5a1a3;
+    color: #222 }
+
+#authorInfoToolTip .bottomButtons { border-radius: 5px }
+
+    #authorInfoToolTip .bottomButtons .blueButton {
+        background: #2c2a2a;
+        border: none }
+
+    #authorInfoToolTip .bottomButtons .redButton {
+        background: #e9363a;
+        border: none }
+
+/*there should be a better way to do this (fixing alignment issues with resnav and the top right corner) */
+.listing-page p.title, .search-page p.title { padding: 8px 0 }
+.listing-page .midcol, .search-page .midcol { padding: 8px; }
+.listing-page a.thumbnail, .search-page a.thumbnail { margin: 8px 8px 0 8px }
+
+/*end*/
+
+.tagline { font-family: verdana, arial, sans-serif }
+
+.listing-page #siteTable .thing ul.flat-list, .search-page #siteTable .thing ul.flat-list {
+    font-family: verdana, arial, sans-serif;
+    padding-bottom: 8px; }
+
+.listing-page #siteTable .thing ul.flat-list a, .search-page #siteTable .thing ul.flat-list a { color: #888 !important }
+.listing-page #siteTable .thing:hover ul a, .search-page #siteTable .thing:hover ul { color: #222 !important }
+.listing-page #siteTable .thing ul a:visited, .search-page #siteTable .thing ul a:visited { color: #222; }
+.listing-page #siteTable .thing ul .nsfw-stamp, .search-page #siteTable .thing ul .nsfw-stamp { visibility: visible; }
+
+.expando-button.video,.expando-button.selftext { background-image: url(%%expando%%) !important }
+.expando-button.selftext.collapsed:hover { background-position: 0px 0px }
+.expando-button.selftext.collapsed { background-position: -23px 0px }
+.expando-button.selftext.expanded:hover { background-position: -46px 0px }
+.expando-button.selftext.expanded { background-position: -69px 0px }
+.expando-button.video.collapsed:hover { background-position: -92px 0px }
+.expando-button.video.collapsed { background-position: -115px 0px }
+.expando-button.video.expanded:hover { background-position: -138px 0px }
+.expando-button.video.expanded { background-position: -161px 0px }
+
+.nextprev { margin: 10px }
+
+    .nextprev a:hover { border: 1px solid #e9363a; }
+
+/*------------------------- comment pages -------------------------*/
+
+.comments-page #siteTable { border: 0 }
+
+.comments-page .link { border: 0 }
+
+.RESSubscriptionButton {
+    background: #2c2a2a !important;
+    color: #e9363a !important;
+    border: none !important }
+
+    .RESSubscriptionButton:hover {
+        background-color: #e9363a !important;
+        color: #2c2a2a !important }
+
+    .RESSubscriptionButton.unsubscribe {
+        background-color: #e9363a !important;
+        color: #2c2a2a !important }
+
+/* taken from /r/realmadrid */
+.res .comment, .res .comment .comment, .res .comment .comment .comment, .res .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment .comment .comment .comment .comment .comment, .res .comment .comment .comment .comment .comment .comment .comment .comment .comment .comment .comment { background-color: transparent !important; }
+
+/*markdown styling*/
+.commentarea blockquote { border-color: #e9363a }
+
+.commentarea h1 { font-size: 20px }
+
+.commentarea h2 {
+    color: #e9363a;
+    font-size: 15px }
+
+/* submit */
+.submit-page .content .infobar { margin: 5px 29px; }
+
+#link-desc:after, #text-desc:after {
+    color: #e9363a;
+    content: "Search before posting.";
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase }
+
+#text-desc { font-size: 0 }
+
+.formtabs-content { border-top: 0 }
+
+.submit-page ul.tabmenu li { padding: 5px 5px }
+
+    .submit-page ul.tabmenu li a {
+        background: #2c2a2a;
+        border: none;
+        border-radius: 5px;
+        color: #e9363a;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 4px 6px;
+        text-transform: uppercase }
+
+#url-field .title-status { color: #e9363a }
+
+.submit-page ul.tabmenu li.selected a, .submit-page ul.tabmenu li a:hover {
+    background: #e9363a;
+    color: #2c2a2a }
+
+.submit-page h1 a { color: #e9363a }
+
+ul.tabmenu.formtab { padding-left: 24px }
+
+.submit-page #title-field, .submit-page #url-field, .submit-page #reddit-field, .submit-page #text-field, .submit-page .info-notice, .submit-page .captcha {
+    background: #2c2a2a !important;
+    border: 0;
+    border-radius: 5px;
+    color: #fff }
+
+.submit-page #title-field .title:after {
+    color: #E9363A;
+    content: " Put the song name in the title.";
+    text-transform: uppercase;
+    font-size: 0.75em; }
+
+.submit-page #url-field .title:after {
+    color: #E9363A;
+    content: " No blogspam. Submit pictures in self-posts";
+    font-size: 0.75em; }
+
+.submit-page .captcha input[type="text"] {
+    background: #fff !important;
+    border: 0;
+    border-radius: 5px;
+    color: #2c2a2a }
+
+.content.submit .info-notice {
+    border: 0;
+    margin-top: 5px }
+
+.submit-page #title-field a, .submit-page #url-field a, .submit-page #reddit-field a, .submit-page .info-notice a { color: #e9363a; }
+
+.linkinfo {
+    background: #2c2a2a;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px }
+
+    .linkinfo .upvotes, .linkinfo .downvotes { font-weight: bold }
+
+input#shortlink-text { border-radius: 5px }
+
+/* search stuff (searchpage + sidebar) */
+form#search {
+    background: #2c2a2a;
+    border-radius: 5px;
+    min-height: 44px;
+    width: 300px }
+
+    form#search label { color: #fff }
+
+/* for alignment issues. Again, there should be a better way to do this */
+.search-page form#search > * { margin: 0 10px 10px }
+
+.search-page .link:first-child { border-top: 1px solid #DFDFDF }
+
+#search input[type="text"] {
+    background: url(%%searchsprite%%) no-repeat #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 20px;
+    margin: 12px 16px;
+    padding: 0 0 0 21px;
+    width: 246px }
+
+    #search input[type="text"]:focus { background-position: 0 -20px }
+
+#searchexpando, #moresearchinfo {
+    background: #2c2a2a;
+    border: solid #222;
+    border-radius: 5px;
+    border-width: 1px 0 0;
+    color: #fff }
+
+#moresearchinfo { border-top: 1px solid #222 }
+
+.searchpane {
+    background-color: #efefef;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px }
+
+a#search_showmore, #moresearchinfo a { color: #e9363a }
+
+/*------------------------- footer -------------------------*/
+
+div.footer-parent { background: #222; border-top: 1px solid #2c2a2a }
+
+    div.footer-parent a:hover { color: #e9363a }
+
+p.bottommenu span.icon { color: #e9363a }
+
+/* Spam */
+.banned-user.even.link { background: #FA8072; }
+
+.spam.even.link { background: #FA8072; }
+
+/*------------------------- raerth -------------------------*/
+
+/*ADD ICONS BASED ON URLS   /
+/ Created by Raerth      /
+/ Inspired by exposur3           /
+/ ========================== /
+/ To save space you can  /
+/ delete sites or sections   /
+/ that are rare for your         /
+/ subreddit.                                 /
+/ ==========================*/
+/*Base code, do not adjust*/
+a.title:before {
+    background-image: url(%%iconsprite2%%);
+    height: 16px;
+    width: 16px;
+    position: relative;
+    content: "";
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 2px; }
+
+/*Reddit (edit in your subreddit name, capitalization important*/
+a[href*="electronicmusic/comments"].title:before { background-position: -32px 0px; }
+a[href*="reddit.com"].title:before { background-position: -16px -48px; }
+
+/*music*/
+a[href*="grooveshark.com"].title:before { background-position: 0px -80px; }
+a[href*="bandcamp.com"].title:before { background-position: 0px -16px; }
+a[href*="reverbnation.com"].title:before { background-position: -16px -64px; }
+a[href*="last.fm"].title:before { background-position: -16px -16px; }
+a[href*="soundcloud.com"].title:before { background-position: -16px -80px; }
+a[href*="8tracks.com"].title:before { background-position: -64px -160px; }
+a[href*="ultimate-guitar.com"].title:before { background-position: -80px -96px; }
+a[href*="http://pitchfork.com"].title:before, a[href*="http://pitchforkmedia.com"].title:before { background-position: 0px -128px; }
+a[href*="rollingstone.com"].title:before { background-position: -64px -128px; }
+a[href*="popmatters.com"].title:before { background-position: -48px -160px; }
+a[href*="spotify.com"].title:before { background-position: -80px -16px; }
+a[href*="nme.com"].title:before { background-position: -64px -32px; }
+a[href*="pandora.com"].title:before { background-position: -48px -64px; }
+
+/*social media*/
+a[href*="facebook.com"].title:before { background-position: 0px -32px; }
+a[href*="twitter.com"].title:before { background-position: -32px -32px; }
+a[href*="myspace.com"].title:before { background-position: -16px -32px; }
+a[href*="delicious.com"].title:before { background-position: 0px -144px; }
+a[href*="digg.com"].title:before { background-position: -16px -144px; }
+
+/*reference and learning*/
+a[href*="wikipedia.org"].title:before { background-position: -32px -64px; }
+a[href*="wikimedia.org"].title:before { background-position: -64px -336px; }
+a[href*="ted.com"].title:before { background-position: -80px -48px; }
+a[href*="about.com"].title:before { background-position: -48px -224px; }
+a[href*=".edu"].title:before, a[href*=".ac.uk"].title:before { background-position: -48px -224px; }
+a[href*=".gov"].title:before { background-position: 0px -352px; }
+
+/*image hosts*/
+a[href*="flickr.com"].title:before, a[href*="flic.kr"].title:before { background-position: 0px -48px; }
+a[href*="imgur.com"].title:before { background-position: -16px 0px; }
+a[href*="deviantart.com"].title:before { background-position: -48px -304px; }
+a[href*="imageshack.us"].title:before { background-position: 0px -224px; }
+a[href*="photobucket.com"].title:before { background-position: -16px -224px; }
+a[href*="twitpic.com"].title:before { background-position: -32px -224px; }
+a[href*="googleusercontent.com"].title:before, a[href*="picasa.google.com"].title:before { background-position: -32px -240px; }
+
+/*video*/
+a[href*="vimeo.com"].title:before { background-position: -32px -48px; }
+a[href*="youtube.com"].title:before, a[href*="youtu.be"].title:before { background-position: -32px -80px; }
+a[href*="break.com"].title:before { background-position: -64px -256px; }
+a[href*="dailymotion.com"].title:before { background-position: -80px -256px; }
+a[href*="megavideo.com"].title:before { background-position: -48px -272px; }
+a[href*="liveleak.com"].title:before { background-position: -64px -272px; }
+a[href*="metacafe.com"].title:before { background-position: -80px -272px; }
+a[href*="veoh.com"].title:before { background-position: -48px -288px; }
+a[href*="videobash.com"].title:before { background-position: -64px -288px; }
+a[href*="worldstarhiphop.com"].title:before { background-position: -80px -288px; }
+
+/*blog*/
+a[href*="tumblr.com"].title:before { background-position: -32px -16px; }
+a[href*="blogspot.com"].title:before { background-position: 0px -96px; }
+a[href*="livejournal.com"].title:before { background-position: -32px -320px; }
+a[href*="wordpress.com"].title:before, a[href*="wp.me"].title:before { background-position: -80px -128px; }
+
+/*US news*/
+a[href*="theatlantic.com"].title:before { background-position: -16px -96px; }
+a[href*="bloomberg.com"].title:before { background-position: 0px -112px; }
+a[href*="businessinsider.com"].title:before { background-position: -16px -112px; }
+a[href*="reuters.com"].title:before { background-position: -64px -112px; }
+a[href*="washingtonpost.com"].title:before { background-position: -80px -112px; }
+a[href*="csmonitor.com"].title:before { background-position: -16px -128px; }
+a[href*="latimes.com"].title:before { background-position: -48px -144px; }
+a[href*="salon.com"].title:before { background-position: -64px -144px; }
+a[href*="motherjones.com"].title:before { background-position: -32px -160px; }
+a[href*="msnbc.msn.com"].title:before { background-position: -64px 0px; }
+a[href*="theglobeandmail.com"].title:before { background-position: -48px -16px; }
+a[href*="bostonherald.com"].title:before { background-position: -64px -16px; }
+a[href*="huffingtonpost.com"].title:before { background-position: -48px -48px; }
+a[href*="cnn.com"].title:before { background-position: -64px -64px; }
+a[href*="npr.org"].title:before { background-position: -80px -160px; }
+a[href*="google.com/hostednews/ap"].title:before { background-position: -0px -176px; }
+a[href*="dailykos.com"].title:before { background-position: -16px -176px; }
+a[href*="forbes.com"].title:before { background-position: -32px -176px; }
+a[href*="ft.com"].title:before { background-position: -48px -176px; }
+a[href*="abcnews.go.com"].title:before, a[href*="abc.go.com"].title:before { background-position: -80px -176px; }
+a[href*="marketwatch.com"].title:before { background-position: -16px -192px; }
+a[href*="wsj.com"].title:before { background-position: -32px -192px; }
+a[href*="realclearpolitics.com"].title:before { background-position: -48px -192px; }
+a[href*="thehill.com"].title:before { background-position: -64px -192px; }
+a[href*="washingtonpost.com"].title:before { background-position: -80px -192px; }
+a[href*="washingtontimes.com"].title:before { background-position: -0px -208px; }
+a[href*="politico.com"].title:before { background-position: -16px -208px; }
+a[href*="usatoday.com"].title:before { background-position: -32px -208px; }
+a[href*="newsmax.com"].title:before { background-position: -48px -208px; }
+a[href*="theblaze.com"].title:before { background-position: -64px -208px; }
+a[href*="boston.com"].title:before { background-position: -80px -208px; }
+
+/*world news*/
+a[href*="bbc.co.uk/news"].title:before, a[href*="bbc.co.uk/programmes"].title:before { background-position: -32px -96px; }
+a[href*="independent.co.uk"].title:before { background-position: -48px -96px; }
+a[href*="cbc.ca"].title:before { background-position: -32px -112px; }
+a[href*="dw-world.de"].title:before { background-position: -32px -144px; }
+a[href*="rte.ie"].title:before { background-position: -80px -144px; }
+a[href*="spiegel.de"].title:before { background-position: 0px -160px; }
+a[href*="economist.com"].title:before { background-position: -48px 0px; }
+a[href*="sky.com"].title:before { background-position: -80px 0px; }
+a[href*="guardian.co.uk"].title:before { background-position: -48px -32px; }
+a[href*="telegraph.co.uk"].title:before { background-position: -80px -64px; }
+a[href*="presseurop.eu"].title:before { background-position: -64px -80px; }
+a[href*="channel4.com"].title:before { background-position: -64px -48px; }
+a[href*="globalpost.com"].title:before { background-position: 0px -320px; }
+a[href*="haaretz.com"].title:before { background-position: -16px -320px; }
+
+/*sci & tech news*/
+a[href*="techdirt.com"].title:before { background-position: -80px -32px; }
+a[href*="engadget.com"].title:before { background-position: -64px -240px; }
+a[href*="gizmodo.com"].title:before { background-position: -80px -240px; }
+a[href*="mashable.com"].title:before { background-position: 0px -256px; }
+a[href*="techcrunch.com"].title:before { background-position: -16px -256px; }
+a[href*="arstechnica.com"].title:before { background-position: -32px -302px; }
+a[href*="nasa.com"].title:before { background-position: -80px -320px; }
+a[href*="pcmag.com"].title:before { background-position: 0px -336px; }
+a[href*="physorg.com"].title:before { background-position: 0px -336px; }
+a[href*="discovery.com"].title:before { background-position: -32px -368px; }
+a[href*="eurekalert.org"].title:before { background-position: -48px -368px; }
+a[href*="nature.com"].title:before { background-position: -64px -368px; }
+a[href*="newscientist.com"].title:before { background-position: -80px -368px; }
+a[href*="popsci.com"].title:before { background-position: 0px -384px; }
+a[href*="sciencedaily.com"].title:before { background-position: -16px -384px; }
+a[href*="torrentfreak.com"].title:before { background-position: -32px -384px; }
+a[href*="wired.com"].title:before { background-position: -48px -384px; }
+
+/*entertainment*/
+a[href*="imdb.com"].title:before { background-position: -48px -80px; }
+a[href*="comedy.co.uk"].title:before { background-position: -16px -160px; }
+a[href*="boingboing.net"].title:before { background-position: -48px -240px; }
+a[href*="tmz.com"].title:before { background-position: -32px -256px; }
+a[href*="deadline.com"].title:before { background-position: -48px -256px; }
+a[href*=".ew.com"].title:before { background-position: 0px -272px; }
+a[href*="hollywoodreporter.com"].title:before { background-position: -16px -272px; }
+a[href*="rottentomatoes.com"].title:before { background-position: -16px -288px; }
+a[href*="variety.com"].title:before { background-position: -32px -288px; }
+a[href*="aintitcool.com"].title:before { background-position: 0px -304px; }
+a[href*="theonion.com"].title:before { background-position: -48px -336px; }
+a[href*="slashfilm.com"].title:before { background-position: -80px -336px; }
+
+/*internet*/
+a[href*="maps.google.com"].title:before, a[href*="g.co/maps"].title:before { background-position: 0px -64px; }
+a[href*="google.com"].title:before, a[href*="goo.gl"].title:before { background-position: -64px -176px; }
+a[href*="apple.com"].title:before { background-position: -64px -224px; }
+a[href*="ask.com"].title:before { background-position: -80px -224px; }
+a[href*="bing.com"].title:before { background-position: 0px -240px; }
+a[href*="microsoft.com"].title:before, a[href*="msn.com"].title:before { background-position: -16px -240px; }
+a[href*="amazon.com"].title:before, a[href*="amazon.co.uk"].title:before { background-position: -16px -304px; }
+a[href*="ebay.com"].title:before, a[href*="ebay.co.uk"].title:before { background-position: -48px -304px; }
+a[href*="etsy.com"].title:before { background-position: -80px -304px; }
+a[href*="mozilla.com"].title:before { background-position: -64px -320px; }
+
+/*media*/
+a[href*="radiotimes.com"].title:before { background-position: -64px -96px; }
+a[href*="bbc.co.uk/iplayer"].title:before { background-position: -48px -112px; }
+a[href*="itv.com"].title:before { background-position: -48px -128px; }
+a[href*="hulu.com"].title:before { background-position: -32px -272px; }
+a[href*="netflix.com"].title:before { background-position: 0px -288px; }
+
+/*shitlist*/
+a[href*="dailymail.co.uk"].title:before, a[href*="thesun.co.uk"].title:before, a[href*="mirror.co.uk"].title:before, a[href*="dailystar.co.uk"].title:before, a[href*="foxnews.com"].title:before, a[href*="freerepublic.com"].title:before, a[href*="perezhilton.com"].title:before , a[href*="gawker.com"].title:before { background-position: -32px -128px; }
+
+/* unassigned icons */
+spam_icon { background-position: -32px -336px; }
+cross_icon { background-position: -16px -352px; }
+sad_icon { background-position: -32px -352px; }
+happy_icon { background-position: -48px -352px; }
+star_icon { background-position: -64px -352px; }
+stop_icon { background-position: -80px -352px; }
+tick_icon { background-position: 0px -368px; }
+warn_icon { background-position: -16px -368px; }
+pdf_icon { background-position: -64px -384px; }
