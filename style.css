@@ -85,6 +85,9 @@ a.pretty-button.positive.pressed, a.pretty-button.negative.pressed {
 
 .red { color: #e9363a }
 
+.content { margin-top: 27px !important; }
+.side { margin-top: 27px !important; }
+
 hr {
     background-color: #dfdfdf;
     border: 0;
@@ -221,7 +224,7 @@ tr:hover { background: #f5a1a3 }
 
 .side {
     color: #222;
-    margin: 46px 5px 0 5px }
+    margin: 5px 5px 0 5px }
 
     /* rules banner */
 .side blockquote {
@@ -245,9 +248,37 @@ tr:hover { background: #f5a1a3 }
 
         .side blockquote ul { padding: 5px }
 
+/*link flair filtering panel*/
+.side .md ul:first-child {
+    background: #efefef;
+    border-bottom: 1px solid #dfdfdf;
+    border-top: 1px solid #dfdfdf;
+    height: 27px;
+    left: 0;
+    margin-left: 0;
+    margin-right: 0; 
+    overflow: hidden;
+    position: absolute; 
+    padding-left: 80px;
+    right: 0;
+    top: 155px;
+    white-space: nowrap;
+}
+
+    .side .md ul:first-child li {
+        display: inline-block;
+        padding: 5px;
+        list-style-type: none; }
+
+        .side .md ul:first-child li a {
+            color: #000; }
+
+        .side .md ul:first-child li a:hover {
+            color: #e9363a; }
+
 /* Sticky */
 /*#siteTable {  padding-top: 35px } /*disable when there's no sticky*/
-.side a[title="sticky"] {
+/*.side a[title="sticky"] {
     background: #2C2A2A;
     border: none;
     border-radius: 5px;
@@ -278,7 +309,7 @@ tr:hover { background: #f5a1a3 }
     border-top-left-radius: 5px;
     border-top-right-radius: 0px;
     color: #fff;
-    content: \"attn: ";
+    content: "attn: ";
     display: inline-block;
     font-weight: bold;
     height: 15px;
@@ -288,28 +319,37 @@ tr:hover { background: #f5a1a3 }
     text-align: center }
 
 .side a[title="sticky"]:hover:before { background: #2c2a2a; color: #fff }
-
+*/
 .side > div { clear: left; }
 
 .comments-page .side:before { background-position: 0% 100%; }
 
-.side a[href="/r/electronicmusic/submit/"] {
+.morelink {
+    background: none !important;
+    border: none !important;
+    height: 29px; }
+    
+.nub {
+    display: none; }
+
+    .sidebox.submit-text .morelink {
+        display: none; }
+
+    .sidebox.submit-link .morelink a {
         background: url(%%submitsprite%%) no-repeat #2c2a2a;
         background-position: 0 0;
         border-radius: 5px;
-        color: #e9363a;
         display: block;
-        font-size: 20px;
+        text-indent: -9999px;
         height: 29px;
         padding: 4px 6px;
         position: absolute;
         right: 77px;
         text-align: center;
         text-transform: uppercase;
-        top: 174px;
         width: 142px }
-
-    .side a[href="/r/electronicmusic/submit/"]:hover {
+    
+    .sidebox.submit-link .morelink a:hover {
         background-color: #e9363a;
         background-position: 0 -29px }
 
@@ -414,8 +454,6 @@ form#login_login-main {
 
         .side blockquote:last-child a[title="Genre Mondays"]:hover { background-position: -250px -50px }
 
-.sidebox { display: none }
-
 .sidecontentbox .content { border-radius: 5px }
 
 /*------------------------- Flair -------------------------*/
@@ -488,7 +526,7 @@ form#login_login-main {
     .linkflair-dubstep      .linkflairlabel { background-color: #50434D }
     .linkflair-electro      .linkflairlabel { background-color: #864194 }
     .linkflair-electronica  .linkflairlabel { background-color: #352E29 }
-    .linkflair-hardcore     .linkflairlabel { background-color: # }
+    /*.linkflair-hardcore     .linkflairlabel { background-color: # }
     .linkflair-hardstyle    .linkflairlabel { background-color: # }
     .linkflair-house        .linkflairlabel { background-color: # }
     .linkflair-industrial   .linkflairlabel { background-color: # }
