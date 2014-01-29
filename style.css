@@ -791,12 +791,14 @@ input#shortlink-text { border-radius: 5px }
 form#search {
     background: #2c2a2a;
     border-radius: 5px;
-    left: -12px;
     min-height: 44px;
-    position: relative;
     width: 300px }
 
     form#search label { color: #fff }
+
+    body.search-page form#search {
+        position: relative;
+        left: -12px }
 
 /* for alignment issues. Again, there should be a better way to do this */
 .search-page form#search > * { margin: 0 10px 10px }
