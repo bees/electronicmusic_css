@@ -41,11 +41,8 @@ a { color: #e9363a }
     width: 16px }
 
     .arrow.down { background-position: 0 0 !important }
-
     .arrow.downmod { background-position: -16px 0 !important }
-
     .arrow.up { background-position: -32px 0 !important }
-
     .arrow.upmod { background-position: -48px 0 !important }
 
 blockquote { border-color: #e9363a }
@@ -62,7 +59,6 @@ blockquote { border-color: #e9363a }
 .error { color: #e9363a }
 
 h1 { font-size: 20px }
-
 h2 { color: #e9363a }
 
 .menuarea, .panestack-title { border-bottom: none }
@@ -220,6 +216,44 @@ tr:hover { background: #f5a1a3 }
     margin: 76px 0 0 425px;
     text-shadow: 0 0 .25em #2c2a2a, 0 0 .25em #2c2a2a }
 
+/* technically sidebar but in the header so w/e */
+
+.side a[title="radio"] {
+    position: absolute;
+    color: #000;
+    background: #fff;
+    height: 31px;
+    padding: 4px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 5px 2px #2C2A2A;
+    top: 71px;
+    left: 550px;
+    width: 68px;
+    z-index: 1000; }
+
+        .side a[title="radio"]:hover {
+            background: #e9363a;
+            color: #fff; }
+
+        .side a[title="radio"]:before {
+            display: block;
+            position: absolute;
+            background: url(%%radiosprite%%) no-repeat #e9363a;
+            background-position: center top;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            box-shadow: -5px 0 5px 0 #2C2A2A;
+            content: " ";
+            height: 39px;
+            left: -39px;
+            top: 0;
+            width: 39px; }
+
+        .side a[title="radio"]:hover:before {
+            background-color: #fff;
+            background-position: center bottom; }
+
 /*------------------------- sidebar -------------------------*/
 
 .side {
@@ -256,14 +290,13 @@ tr:hover { background: #f5a1a3 }
     height: 27px;
     left: 0;
     margin-left: 0;
-    margin-right: 0; 
+    margin-right: 0;
     overflow: hidden;
-    position: absolute; 
+    position: absolute;
     padding-left: 80px;
     right: 0;
     top: 155px;
-    white-space: nowrap;
-}
+    white-space: nowrap; }
 
     .side .md ul:first-child li {
         display: inline-block;
@@ -271,7 +304,9 @@ tr:hover { background: #f5a1a3 }
         list-style-type: none; }
 
         .side .md ul:first-child li a {
-            color: #000; }
+            color: #000;
+            position: relative;
+            top: 1px; }
 
         .side .md ul:first-child li a:hover {
             color: #e9363a; }
@@ -328,7 +363,7 @@ tr:hover { background: #f5a1a3 }
     background: none !important;
     border: none !important;
     height: 29px; }
-    
+
 .nub {
     display: none; }
 
@@ -348,7 +383,7 @@ tr:hover { background: #f5a1a3 }
         text-align: center;
         text-transform: uppercase;
         width: 142px }
-    
+
     .sidebox.submit-link .morelink a:hover {
         background-color: #e9363a;
         background-position: 0 -29px }
@@ -756,7 +791,9 @@ input#shortlink-text { border-radius: 5px }
 form#search {
     background: #2c2a2a;
     border-radius: 5px;
+    left: -12px;
     min-height: 44px;
+    position: relative;
     width: 300px }
 
     form#search label { color: #fff }
