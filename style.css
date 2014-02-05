@@ -283,6 +283,9 @@ tr:hover { background: #f5a1a3 }
         .side blockquote ul { padding: 5px }
 
 /*link flair filtering panel*/
+/* http://www.reddit.com/r/CSSTutorials/comments/mwpw8/tutorial_sticky_dropdown_menu/ */
+        
+/*
 .side .md ul:first-child {
     background: #efefef;
     border-bottom: 1px solid #dfdfdf;
@@ -310,7 +313,7 @@ tr:hover { background: #f5a1a3 }
 
         .side .md ul:first-child li a:hover {
             color: #e9363a; }
-
+*/
 /* Sticky */
 /*#siteTable {  padding-top: 35px } /*disable when there's no sticky*/
 /*.side a[title="sticky"] {
@@ -357,7 +360,8 @@ tr:hover { background: #f5a1a3 }
 */
 .side > div { clear: left; }
 
-.comments-page .side:before { background-position: 0% 100%; }
+.comments-page .side:before { background-position: 0% 100% }
+.comments-page .content { margin-top: 36px !important }
 
 .morelink {
     background: none !important;
@@ -798,7 +802,7 @@ form#search {
 
     body.search-page form#search {
         position: relative;
-        left: -12px }
+        left: -12px !important}
 
 /* for alignment issues. Again, there should be a better way to do this */
 .search-page form#search > * { margin: 0 10px 10px }
